@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 
 public class Usuario {
-    String nome, senha, status;
+    String nome, senha, status, login, email;
     int nTweets;
+    
     public String getNome() {
         return nome;
     }
@@ -21,17 +22,31 @@ public class Usuario {
     public void setStatus(String status) {
         this.status = status;
     }
+    public String getLogin() {
+        return login;
+    }
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public int getnTweets() {
         return nTweets;
     }
     public void setnTweets(int nTweets) {
         this.nTweets = nTweets;
     }
-    public Usuario(String nome, String senha, String status, int nTweets) {
+    public Usuario(String nome, String senha, String login, String email) {
         this.nome = nome;
         this.senha = senha;
-        this.status = status;
-        this.nTweets = nTweets;
+        this.status = "off";
+        this.login = login;
+        this.email = email;
+        this.nTweets = 0;
     }
     ArrayList<String> tweet = new ArrayList<String>();
 
