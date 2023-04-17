@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Usuario {
     String nome, senha, status, login, email;
-    int nTweets;
+    int nTweets, idTweet = 0;
     
     public String getNome() {
         return nome;
@@ -56,7 +56,7 @@ public class Usuario {
             status = "on";
             System.out.println("Status: ONLINE");
         }else{
-            System.out.println("Erro senha errada");
+            System.out.println("Erro, senha errada");
         }
     }
     public void deslogarUsuario(String senha){ /* <-- Desloga o usuario mudando o status para "off" */
@@ -76,7 +76,8 @@ public class Usuario {
         }
     }
     public void adicionarTweet(String txt){
-        tweet.add(txt);
+            tweet.add(txt);
+            idTweet++;
     }
     public void mostrarFeed(){
         for (int i = 0; i < tweet.size(); i++) {

@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.lang.model.util.ElementScanner6;
 
 public class Twitter{
     static Scanner leitor = new Scanner(System.in);
@@ -46,10 +45,15 @@ public class Twitter{
         Usuario a = new Usuario(nome, senha, login, email);
         return a;
     }
+    public static Feed criaFeed(String users, String tweet) {
+        Feed f = new Feed(users, tweet);
+        return f;
+        
+    }
     public static void main(String[] args) {
         int sc = -1;
         ArrayList<Usuario> user = new ArrayList<Usuario>();
-        ArrayList<String> feed = new ArrayList<String>();
+        ArrayList<Feed> feed = new ArrayList<Feed>();
         do{    /* <-- Menu do para validar a resposta do Usuario */
             switch(sc){ /* <-- Utilizando switch case para as opcoes do menu */
                 case'1': 
@@ -69,6 +73,8 @@ public class Twitter{
                         if(user.get(i).getLogin().equals(x)){
                             System.out.println("Senha: ");
                             user.get(i).logarUsuario(leitor.next());
+                        }else{
+                            System.out.println("Nao existe usuario");
                         }
                     }
                 case'4':
@@ -78,16 +84,28 @@ public class Twitter{
                         if(user.get(i).getLogin().equals(y)){
                             System.out.println("Senha: ");
                             user.get(i).deslogarUsuario(leitor.next());
+                        }else{
+                            System.out.println("Nao existe usuario");
                         }
                     }
                 case '5':
+                    String tweet;
+                    String users;
                     System.out.println("Login: ");
-                    String twt;
+                    String z = leitor.next();
                     for (int i = 0; i < user.size(); i++) {
-                        if(user.get(i).getStatus().equals("on")){
-                            twt = leitor.nextLine();
-                            feed.add(user.get(i).getNome() + twt);
-                            user.get(i).adicionarTweet(twt);
+                        if(user.get(i).getLogin().equals(z)){
+                            if(user.get(i).getStatus().equals("on")){
+                                System.out.println("Tweet: ");
+                                users = user.get(i).getLogin();
+                                tweet = leitor.next();
+                                feed.add(criaFeed(users, tweet));
+                                user.get(i).adicionarTweet(tweet);
+                            }else{
+                                System.out.println("Status off");
+                            }
+                        }else{
+                            System.out.println("Nao existe usuario");
                         }
                     }
                 case '6':
