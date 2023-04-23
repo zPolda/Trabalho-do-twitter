@@ -1,7 +1,7 @@
 public class Feed {
-    String text, user, id;
+    private String text, user, id;
 
-    
+    /* Getters and Setters */
     public String getId() {
         return id;
     }
@@ -20,12 +20,13 @@ public class Feed {
     public void setUser(String user) {
         this.user = user;
     }
+    /* Metodo Construtor */
     public Feed(String text, String user, String id) {
         this.id = id;
         this.text = text;
         this.user = user;
     }
-    public void mostarFeed(){
+    public void mostarFeed(){ /* <-- Mostra o feeed printado todos os text */
         System.out.println(" ");
         System.out.println(text);
         System.out.println(" ");

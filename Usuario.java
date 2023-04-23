@@ -2,8 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Usuario {
-    String nome, senha, status, login, email;
-    int nTweets, idTweet;
+    private String nome, senha, status, login, email;
+    private int nTweets, idTweet;
+
+    ArrayList<String> tweet = new ArrayList<String>();
+
+   
+    static Scanner sc = new Scanner(System.in);
+
+    /* Setters and Getters */
 
     public int getIdTweet() {
         return idTweet;
@@ -11,20 +18,13 @@ public class Usuario {
     public void setIdTweet(int idTweet) {
         this.idTweet = idTweet;
     }
-    static Scanner sc = new Scanner(System.in);
-
-    
-    
     public String getNome() {
         return nome;
     }
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public String getSenha() {
-        return senha;
-    }
-    public void setSenha(String senha) {
+    private void setSenha(String senha) {
         this.senha = senha;
     }
     public String getStatus() {
@@ -51,6 +51,7 @@ public class Usuario {
     public void setnTweets(int nTweets) {
         this.nTweets = nTweets;
     }
+    /* Metodo Contrutor */
     public Usuario(String nome, String senha, String login, String email) {
         this.nome = nome;
         this.senha = senha;
@@ -59,7 +60,7 @@ public class Usuario {
         this.email = email;
         this.nTweets = 0;
     }
-    ArrayList<String> tweet = new ArrayList<String>();
+    
 
     public void logarUsuario(String senha){ /* <-- Loga o usuario mudando o status para "on" */
         String sen = senha;
@@ -86,20 +87,13 @@ public class Usuario {
             return false;
         }
     }
-    public void adicionarTweet(String txt){
+    public void adicionarTweet(String txt){ /* <-- Faz a adicao do tweet e de um id no obj  */
             idTweet = idTweet + 1;
             String str = String.valueOf(idTweet);
             tweet.add(str + " : " + txt);
             nTweets++;
     }
-    public void mostrarFeed(){
-        for (int i = 0; i < tweet.size(); i++) {
-            System.out.println(" ");
-            tweet.get(i);
-            System.out.println(" ");
-        }
-    }
-    public String mostraTweets(){
+    public String mostraTweets(){ /* <- Retorna o id do tweet em uma funcao que mostra os mesmos */
         for (int index = 0; index < tweet.size(); index++) {
             System.out.println(" ");
             System.out.println(tweet.get(index));
@@ -109,7 +103,7 @@ public class Usuario {
         String id = sc.next();
         return id;
     }
-    public void removerFeed(String id){
+    public void removerFeed(String id){ /* <-- Recebe o id do mostraTweets() e remove o memso do Array */
         for (int i = 0; i < tweet.size(); i++) {
             if(tweet.get(i).startsWith(id)){
                 tweet.remove(i);
@@ -118,7 +112,7 @@ public class Usuario {
             }
         }
     }
-    public void trocaSenha(String sen){
+    public void trocaSenha(String sen){ /* <-- Muda a senha do usuario */
         if(validadorSenha(sen) == true){
             System.out.println("Nova Senha: ");
             setSenha(sc.next());

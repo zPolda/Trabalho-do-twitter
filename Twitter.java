@@ -14,7 +14,7 @@ public class Twitter{
 
         Integer usuariosAtivosAgora = 0;
         for (Usuario usuario : user){
-            if( usuario.status.equals("on") ){
+            if( usuario.getStatus().equals("on") ){
                 usuariosAtivosAgora++;
             }
         }
@@ -38,8 +38,8 @@ public class Twitter{
             }
 
             System.out.println("Login do usuário que mais tweetou e quantidade de tweets: " + usuarioMaisTweets + " | " + qtdTweetsUsuario + " tweets");
-            String usuarioUltimoTweet = feed.get(feed.size() - 1).user;
-            String ultimoTweet = feed.get(feed.size() - 1).text;
+            String usuarioUltimoTweet = feed.get(feed.size() - 1).getUser();
+            String ultimoTweet = feed.get(feed.size() - 1).getText();
 
             System.out.println("Login do usuário que tweetou por último e tweet: " + usuarioUltimoTweet + " | " + ultimoTweet); 
         }else{
@@ -128,11 +128,15 @@ public class Twitter{
                     users = user.get(i).getLogin();
                     leitor.nextLine();
                     tweet = leitor.nextLine();
-                    user.get(i).adicionarTweet(tweet);
-                    id = user.get(i).getIdTweet();
-
-                    feed.add(criaFeed(tweet, users, String.valueOf(id)));
-                    return;
+                    if(validadorTweet(tweet) == true){
+                        user.get(i).adicionarTweet(tweet);
+                        id = user.get(i).getIdTweet();
+                        feed.add(criaFeed(tweet, users, String.valueOf(id)));
+                        return;
+                    }else{
+                        System.out.println("Erro. Tamanho minimo de tweet 1 caractere tamanho maximo 140 caracteres");
+                        return;
+                    }
                 }else{
                     System.out.println("Status off");
                     return;
@@ -183,6 +187,7 @@ public class Twitter{
         user.add(criarUsuario());
     }
     /*=============================================================================================================== */
+    /* Cria os dois objts para as 2 classes feed e Usuario */
     public static Usuario criarUsuario(){  /* <-- Funcao para criar usuario */
         String x, nome ="null", login = "null", senha = "null", email = "null";
         do{
@@ -228,11 +233,12 @@ public class Twitter{
         Usuario a = new Usuario(nome, senha, login, email);
         return a;
     }
-    public static Feed criaFeed(String tweet, String users, String id) {
+    public static Feed criaFeed(String tweet, String users, String id) { /* <- Funcao para criar o feed */
         Feed f = new Feed(tweet, users, id);
         return f;
         
     }
+     /*=============================================================================================================== */
     public static void main(String[] args) {
         int sc = -1;
         ArrayList<Usuario> user = new ArrayList<Usuario>();
