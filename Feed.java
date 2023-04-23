@@ -1,10 +1,11 @@
 public class Feed {
-    int id = 0;
-    String text, user;
-    public int getId() {
+    String text, user, id;
+
+    
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getText() {
@@ -19,9 +20,14 @@ public class Feed {
     public void setUser(String user) {
         this.user = user;
     }
-    public Feed(String text, String user) {
-        this.id = id++;
+    public Feed(String text, String user, String id) {
+        this.id = id;
         this.text = text;
         this.user = user;
+    }
+    public void mostarFeed(){
+        System.out.println(" ");
+        System.out.println(text);
+        System.out.println(" ");
     }
 }

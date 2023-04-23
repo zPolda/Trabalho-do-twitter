@@ -1,8 +1,19 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Usuario {
     String nome, senha, status, login, email;
-    int nTweets, idTweet = 0;
+    int nTweets, idTweet;
+
+    public int getIdTweet() {
+        return idTweet;
+    }
+    public void setIdTweet(int idTweet) {
+        this.idTweet = idTweet;
+    }
+    static Scanner sc = new Scanner(System.in);
+
+    
     
     public String getNome() {
         return nome;
@@ -68,16 +79,18 @@ public class Usuario {
             System.out.println("Erro senha errada");
         }
     }
-    private boolean validadorSenha(String sen){ /* <-- Funcao para validar a senha do usuario */
-        if (senha ==  sen ){
+    public boolean validadorSenha(String sen){ /* <-- Funcao para validar a senha do usuario */
+        if (senha.equals(sen)){
             return true;
         }else{
             return false;
         }
     }
     public void adicionarTweet(String txt){
-            tweet.add(txt);
-            idTweet++;
+            idTweet = idTweet + 1;
+            String str = String.valueOf(idTweet);
+            tweet.add(str + " : " + txt);
+            nTweets++;
     }
     public void mostrarFeed(){
         for (int i = 0; i < tweet.size(); i++) {
@@ -86,9 +99,31 @@ public class Usuario {
             System.out.println(" ");
         }
     }
-    public void removeTweet(){
+    public String mostraTweets(){
+        for (int index = 0; index < tweet.size(); index++) {
+            System.out.println(" ");
+            System.out.println(tweet.get(index));
+            System.out.println(" ");
+        }
+        System.out.println("Qual id remover: ");
+        String id = sc.next();
+        return id;
+    }
+    public void removerFeed(String id){
         for (int i = 0; i < tweet.size(); i++) {
-            tweet.remove(i);  
+            if(tweet.get(i).startsWith(id)){
+                tweet.remove(i);
+                nTweets--;
+                System.out.println("Tweet removido com sucesso");
+            }
+        }
+    }
+    public void trocaSenha(String sen){
+        if(validadorSenha(sen) == true){
+            System.out.println("Nova Senha: ");
+            setSenha(sc.next());
+        }else{
+            System.out.println("Erro, senha errada");
         }
     }
 }
